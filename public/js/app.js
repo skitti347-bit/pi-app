@@ -4,14 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('login-btn').addEventListener('click', loginWithPi);
   $('logout-btn').addEventListener('click', logout);
-  $('pay-btn').addEventListener('click', () => {
-    const amount = $('amount').value;
-    const memo = $('memo').value;
-    if (!amount || amount <= 0) {
-      showStatus('Inserisci un importo valido', 'error');
-      return;
-    }
-    startPayment(amount, memo);
+  $('pay-2pi-btn').addEventListener('click', () => {
+    startPayment(2, 'Testnet payment');
   });
 
   showLogin();

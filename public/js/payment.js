@@ -3,7 +3,7 @@ async function startPayment(amount, memo) {
   showStatus('Creazione pagamento testnet...', 'loading');
   try {
     const payment = await Pi.createPayment(
-      { amount: Number(amount), memo: memo || 'Testnet payment', metadata: {} },
+      { amount: Number(amount), memo: memo || 'Testnet payment', metadata: { product: 'testnet_payment' } },
       { onReadyForServerApproval, onReadyForServerCompletion, onCancel, onError }
     );
     return payment;
@@ -12,17 +12,20 @@ async function startPayment(amount, memo) {
   }
 }
 
-function onReadyForServerApproval(paymentId) {
+async function onReadyForServerApproval(paymentId) {
   showStatus('Approvazione server in corso...', 'loading');
-  fetch(CFG.apiBase + '/approve-payment', {
+  const r = await fetch(CFG.apiBase + '/approve-payment', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ paymentId })
-  })
-    .then(r => r.json())
-    .then(d => d.success
-      ? showStatus('Approvato! Completamento...', 'loading')
-      : showStatus('Approvazione fallita', 'error'));
+  });
+  const d = await r.json();
+  if (d.success) {
+    showStatus('Approvato! Completamento...', 'loading');
+  } else {
+    showStatus('Approvazione fallita', 'error');
+    throw new Error('Approve failed');
+  }
 }
 
 function onReadyForServerCompletion(paymentId, txid) {

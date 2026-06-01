@@ -51,7 +51,7 @@ button:hover { opacity: 0.85; }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 #login-btn { background: #e2b04a; color: #1a1a2e; }
-#pay-btn { background: #533483; color: #fff; width: 100%; }
+.pay-big { background: #533483; color: #fff; width: 100%; font-size: 1.4rem; padding: 16px; }
 #logout-btn { background: #444; color: #ccc; font-size: 0.8rem; }
 
 #status {
