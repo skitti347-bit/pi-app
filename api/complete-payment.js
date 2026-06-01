@@ -24,7 +24,7 @@ exports.handler = async (event) => {
     }
 
     // Incolliamo la chiave direttamente anche qui per bypassare i problemi di Vercel env
-    const PI_API_KEY = "8ojpc3vrvhsugmsnpwbbkqzjcgewtihe2idatmkqrptnrwscsjppbm8c0ibchn19";
+    const PI_API_KEY = "o5lno6fzlg8d34fskdk1nvbrqv9jvu0k8wfi1baz08kzcbyqfutsczkyqk59iox8";
 
     const response = await fetch(
       `https://api.minepi.com/v2/payments/${paymentId}/complete`,
