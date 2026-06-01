@@ -1,6 +1,6 @@
 // App initialization
 document.addEventListener('DOMContentLoaded', () => {
-  Pi.init({ version: '2.0', sandbox: CFG.sandbox });
+  Pi.init({ version: '2.0' });
 
   $('login-btn').addEventListener('click', loginWithPi);
   $('logout-btn').addEventListener('click', logout);
