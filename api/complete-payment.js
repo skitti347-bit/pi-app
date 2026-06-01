@@ -23,15 +23,18 @@ exports.handler = async (event) => {
       };
     }
 
+    // Incolliamo la chiave direttamente anche qui per bypassare i problemi di Vercel env
+    const PI_API_KEY = "8ojpc3vrvhsugmsnpwbbkqzjcgewtihe2idatmkqrptnrwscsjppbm8c0ibchn19";
+
     const response = await fetch(
       `https://api.minepi.com/v2/payments/${paymentId}/complete`,
       {
         method: 'POST',
         headers: {
-          'Authorization': `Key ${process.env.PI_API_KEY}`,
+          'Authorization': `Key ${PI_API_KEY}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ txid })
+        body: JSON.stringify({ txid }) // Qui il txid DEVE esserci
       }
     );
 

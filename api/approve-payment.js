@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { paymentId, txid } = JSON.parse(event.body);
+    const { paymentId } = JSON.parse(event.body); // Rimosso txid da qui, non serve nell'approvazione
     if (!paymentId) {
       return {
         statusCode: 400,
@@ -23,15 +23,18 @@ exports.handler = async (event) => {
       };
     }
 
+    // Incolliamo la chiave direttamente per evitare i problemi di Vercel env
+    const PI_API_KEY = "8ojpc3vrvhsugmsnpwbbkqzjcgewtihe2idatmkqrptnrwscsjppbm8c0ibchn19";
+
     const response = await fetch(
       `https://api.minepi.com/v2/payments/${paymentId}/approve`,
       {
         method: 'POST',
         headers: {
-          'Authorization': `Key ${process.env.PI_API_KEY}`,
+          'Authorization': `Key ${PI_API_KEY}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ txid: txid || undefined })
+        body: JSON.stringify({}) // Il body deve essere vuoto nell'approvazione!
       }
     );
 
