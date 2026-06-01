@@ -1,0 +1,8 @@
+{
+  "name": "pi-app",
+  "version": "1.0.0",
+  "description": "Pi Network Testnet Login + Payment",
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}
