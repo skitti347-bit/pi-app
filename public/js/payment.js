@@ -29,7 +29,8 @@ async function onReadyForServerApproval(paymentId) {
 }
 
 function onReadyForServerCompletion(paymentId, txid) {
-  completeServerPayment(paymentId, txid);
+  // Aggiungi il 'return' davanti per passare la Promise all'SDK di Pi
+  return completeServerPayment(paymentId, txid);
 }
 
 async function completeServerPayment(paymentId, txid) {
@@ -43,11 +44,14 @@ async function completeServerPayment(paymentId, txid) {
     const d = await r.json();
     if (d.success) {
       showStatus('✅ Pagamento completato con successo sulla Testnet!', 'success');
+      return d; // Ritorna un valore positivo all'SDK
     } else {
       showStatus('❌ Completamento fallito: ' + JSON.stringify(d.details), 'error');
+      throw new Error('Completion failed on server');
     }
   } catch (err) {
     showStatus('Errore: ' + err.message, 'error');
+    throw err; // Rilancia l'errore per sbloccare l'SDK
   }
 }
 
