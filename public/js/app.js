@@ -1,6 +1,7 @@
 // App initialization
 document.addEventListener('DOMContentLoaded', () => {
-  Pi.init({ version: '2.0' });
+  // FORZA A FALSE: dice all'SDK di usare la Testnet ufficiale
+  Pi.init({ version: '2.0', sandbox: false }); 
 
   $('login-btn').addEventListener('click', loginWithPi);
   $('logout-btn').addEventListener('click', logout);
